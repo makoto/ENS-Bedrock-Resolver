@@ -1,0 +1,10 @@
+steps:
+# Uses the ubuntu build step:
+# to run a shell script; and
+# set env variables for its execution
+- name: 'l2-resolver'
+  args: ['yarn', 'start']
+  env:
+  - 'L1_PROVIDER_URL=$L1_PROVIDER_URL'
+  - 'L2_PROVIDER_URL=$L2_RESOLVER_ADDRESS'
+  - 'L2_RESOLVER_ADDRESS=$L2_RESOLVER_ADDRESS'
