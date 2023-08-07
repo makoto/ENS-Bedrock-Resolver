@@ -5,6 +5,7 @@ This repository contains contract that have to be deployed on Optimism and Ether
 Everything is configured already so to set it up you just have to follow the config Setup section
 
 # Contracts
+
 ## L2PubicResolver (L2)
 
 The L2PublicResolver is a Smart Contract derived from the ENS PublicResolver implementation. The functionality for setting records remains consistent with the original implementation. However, when retrieving a record, the caller is required to provide context, specifically the address of the record as per the ENS registry.
@@ -12,7 +13,8 @@ The L2PublicResolver is a Smart Contract derived from the ENS PublicResolver imp
 This feature empowers record owners to securely set their records without needing direct access to the ENS Registry contract deployed on the Ethereum mainnet. By incorporating this mechanism, record owners can confidently manage their records in a trustless manner on Layer 2 solutions.
 
 ### Context
-1
+
+12
 
 The L2PublicResolver introduces a novel approach to record management by utilizing an arbitrary bytes string called "context" to define the namespace to which a record belongs. Specifically, in the context of the L2PublicResolver, this "context" refers to the address of the entity that has set a particular record.
 
@@ -66,9 +68,8 @@ The L2PublicResolverVerifier is a smart contract designed to handle 'resolveWith
 
 The contract inherits from the BedrockCCIP Resolver and overrides 'resolveWithProof' for records that require special handling, such as addresses or ABIs.
 
-
-
 # Architecture
+
 The following diagrams show all the steps involved in performing a full CCIP lookup.
 
 ## Resolve
@@ -92,6 +93,7 @@ error OffchainLookup(address sender, string[] urls, bytes callData, bytes4 callb
 1.5 It returns the encoded result along with its proof.
 
 ## ResolverWithProof
+
 Resolve that the response from the gateway is part of the optimism state and is originated from the resolver contract specified in the Verifier
 ![resolve](./ResolveWithProof-diagramm.png)
 
@@ -107,8 +109,6 @@ Resolve that the response from the gateway is part of the optimism state and is 
 2. If step 2.3 was successful, the function returns the result. However, if the result does not match the value stored in the slot, the contract reverts with the error message 'proof does not match response.'
 3. The contract will revert if the state root has not been committed to L1. This situation occurs when the stateRoot has not yet been pushed to the L2OutputOracle contract by the sequencer. It's important to note that it might take up to 30 minutes for a newly set record to become available and be successfully resolved. In that case the contract reverts with 'Account is not part of the provided state root'
 4. The proof may also be considered invalid for other reasons, often indicating an error in the gateway.
-   
-   
 
 # Setup Gateway
 
