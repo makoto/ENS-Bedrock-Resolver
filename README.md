@@ -14,7 +14,7 @@ This feature empowers record owners to securely set their records without needin
 
 ### Context
 
-12
+123
 
 The L2PublicResolver introduces a novel approach to record management by utilizing an arbitrary bytes string called "context" to define the namespace to which a record belongs. Specifically, in the context of the L2PublicResolver, this "context" refers to the address of the entity that has set a particular record.
 
